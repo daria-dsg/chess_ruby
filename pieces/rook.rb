@@ -1,4 +1,3 @@
-
 require_relative "piece.rb"
 
 class Rook < Piece
@@ -11,5 +10,4 @@ class Rook < Piece
     def move_dirs
         horizontal_dirs
     end
-
 end
