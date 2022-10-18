@@ -27,7 +27,16 @@ module Slideable
         moves
     end
 
-    def diagonal_dirs(pos)
+    def diagonal_dirs
+        moves = []
+        DIAGONAL_DIRS.each do |dirs|
+            dup = pos
+            until edge?(dup)
+                dup = [dup[0] + dirs[0], dup[1] + dirs[1]]
+                moves << dup 
+            end
+        end
+        moves
     end
 
     def edge?(dup)
