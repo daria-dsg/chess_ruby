@@ -6,4 +6,7 @@ class Queen < Piece
         "♕".colorize(color)
     end
 
+    def move_dirs
+        
+    end
 end
