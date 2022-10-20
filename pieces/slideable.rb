@@ -14,30 +14,26 @@ module Slideable
     ]
 
     def horizontal_dirs
-        moves = []
-        HORIZONTAL_DIRS.each do |dirs|
-            dup = pos
-            until edge?(dup)
-                dup = [dup[0] + dirs[0], dup[1] + dirs[1]]
-                moves << dup 
-            end
-        end
-        moves
+        HORIZONTAL_DIRS
     end
 
     def diagonal_dirs
+        DIAGONAL_DIRS 
+    end
+
+    def moves
         moves = []
-        DIAGONAL_DIRS.each do |dirs|
+        move_dirs.each do |dirs|
             dup = pos
-            until edge?(dup)
+            until grow_moves?(dup)
                 dup = [dup[0] + dirs[0], dup[1] + dirs[1]]
                 moves << dup 
             end
         end
-        moves
+        moves   
     end
 
-    def edge?(dup)
+    def grow_moves?(dup)
         (dup[0] == 0 || dup[0] == 7) || (dup[1] == 0 || dup[1] == 7)
     end
 end
