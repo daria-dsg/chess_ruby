@@ -1,16 +1,17 @@
-require_relative "pieces.rb"
+require_relative 'pieces'
 
 class Board
     def initialize
         @rows = Array.new(8){Array.new(8)}
-
-        populate
+        @nil = Null.new
+        populate_board
     end
 
-    def populate
+    def populate_board
         populate_pawns
         populate_black
         populate_white
+        populate_null
     end
 
     def populate_pawns
@@ -51,6 +52,14 @@ class Board
         self[[7, 4]] = King.new(:white, self, [7, 5])
     end
 
+    def populate_null
+        (2 .. 5).each do |x|
+            (0 .. 7).each do |y|
+                self[[x,y]] = Null.new(:none, self,[x,y])
+            end
+        end
+    end
+
 
     def [](pos)
         raise "Invalid position" unless valid_pos?(pos)
@@ -68,7 +77,7 @@ class Board
 
     def move_piece(start_pos, end_pos)
         raise "start position is empty" if empty?(start_pos)
-        self[end_pos], self[start_pos] = self[start_pos], nil
+        self[end_pos], self[start_pos] = self[start_pos], nul
     end
 
     def valid_pos?(pos)

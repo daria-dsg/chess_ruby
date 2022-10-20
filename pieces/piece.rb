@@ -1,4 +1,4 @@
-require "colorize"
+require 'colorize'
 
 class Piece
     attr_reader :pos, :color
@@ -9,11 +9,6 @@ class Piece
 
     def empty?
         self == nil
-    end
-
-    # return an array of places where piece can move
-    def valid_moves
-        
     end
 end
 
