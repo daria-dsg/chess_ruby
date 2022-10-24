@@ -1,39 +1,46 @@
 module Slideable
-    HORIZONTAL_DIRS = [
-        [0, -1],
-        [-1, 0],
-        [0, 1],
-        [1, 0]
-    ]
+  HORIZONTAL_DIRS = [
+    [0, -1],
+    [-1, 0],
+    [0, 1],
+    [1, 0]
+  ].freeze
 
-    DIAGONAL_DIRS = [
-        [-1, -1],
-        [-1, 1],
-        [1, 1],
-        [1, -1]
-    ]
+  DIAGONAL_DIRS = [
+    [-1, -1],
+    [-1, 1],
+    [1, 1],
+    [1, -1]
+  ].freeze
 
-    def horizontal_dirs
-        HORIZONTAL_DIRS
+  def horizontal_dirs
+    HORIZONTAL_DIRS
+  end
+
+  def diagonal_dirs
+    DIAGONAL_DIRS 
+  end
+
+  def moves
+    moves = []
+    move_dirs.each do |dir_x,dir_y|
+      cur_x, cur_y = pos
+
+      new_pos = [cur_x + dir_x, cur_y + dir_y]
+
+      next unless @board.valid_pos?(new_pos)
+          
+      until blocked_moves?(new_pos)
+        new_x,new_y = new_pos
+        moves << new_pos 
+        new_pos = [new_x + dir_x, new_y + dir_y]
+      end
     end
 
-    def diagonal_dirs
-        DIAGONAL_DIRS 
-    end
+    moves   
+  end
 
-    def moves
-        moves = []
-        move_dirs.each do |dirs|
-            dup = pos
-            until grow_moves?(dup)
-                dup = [dup[0] + dirs[0], dup[1] + dirs[1]]
-                moves << dup 
-            end
-        end
-        moves   
-    end
-
-    def grow_moves?(dup)
-        (dup[0] == 0 || dup[0] == 7) || (dup[1] == 0 || dup[1] == 7)
-    end
+  def blocked_moves?(pos)
+    color == board[pos].color
+  end
 end

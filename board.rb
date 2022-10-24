@@ -1,9 +1,10 @@
 require_relative 'pieces'
+require 'byebug'
 
 class Board
     def initialize
-        @rows = Array.new(8){Array.new(8)}
         @nil = Null.new
+        @rows = Array.new(8){Array.new(8, @nil)}
         populate_board
     end
 
@@ -11,7 +12,6 @@ class Board
         populate_pawns
         populate_black
         populate_white
-        populate_null
     end
 
     def populate_pawns
@@ -52,14 +52,6 @@ class Board
         self[[7, 4]] = King.new(:white, self, [7, 5])
     end
 
-    def populate_null
-        (2 .. 5).each do |x|
-            (0 .. 7).each do |y|
-                self[[x,y]] = Null.new(:none, self,[x,y])
-            end
-        end
-    end
-
 
     def [](pos)
         raise "Invalid position" unless valid_pos?(pos)
@@ -77,21 +69,24 @@ class Board
 
     def move_piece(start_pos, end_pos)
         raise "start position is empty" if empty?(start_pos)
-        self[end_pos], self[start_pos] = self[start_pos], nul
+        piece = self[start_pos]
+        
+        if piece.moves.include?(end_pos)
+            piece.pos = end_pos
+            self[end_pos], self[start_pos] = piece, @nil
+        else
+            raise "end position is not valid "
+        end
     end
 
     def valid_pos?(pos)
         x, y = pos
-        x.between?(0,8) && y.between?(0,8)
+        x.between?(0,7) && y.between?(0,7)
     end
 
-    def add_piece(piece,pos)
-        raise "position is not empty" unless empty?(pos)
-        self[pos] = piece
-    end
 
     def empty?(pos)
-        self[pos] == nil
+        self[pos] == @nil
     end
 end
 
