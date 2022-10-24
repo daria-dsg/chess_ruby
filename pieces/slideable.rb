@@ -27,7 +27,6 @@ module Slideable
       cur_x, cur_y = pos
 
       new_pos = [cur_x + dir_x, cur_y + dir_y]
-
       next unless @board.valid_pos?(new_pos)
           
       until blocked_moves?(new_pos)
