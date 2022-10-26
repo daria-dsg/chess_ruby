@@ -46,6 +46,8 @@ class Cursor
 
   private
 
+  attr_writer :cursor_pos
+
   def read_char
     STDIN.echo = false # stops the console from printing return values
 
@@ -76,8 +78,31 @@ class Cursor
   end
 
   def handle_key(key)
+    case key
+      when :space, :return
+        cursor_pos
+      when :left
+        update_pos(MOVES[:left])
+        nil
+      when :right
+        update_pos(MOVES[:right])
+        nil
+      when :up
+        update_pos(MOVES[:up])
+        nil
+      when :down
+        update_pos(MOVES[:down])
+        nil
+      when :ctrl_c
+        exit(0)
+    end
   end
 
   def update_pos(diff)
+    x, y = diff
+    cur_x, cur_y = self.cursor_pos
+    new_cursor = [cur_x + x, cur_y + y]
+    raise "Invalid position" unless @board.valid_pos?(new_cursor)
+    self.cursor_pos = new_cursor
   end
 end
