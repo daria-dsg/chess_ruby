@@ -21,8 +21,10 @@ class Display
       end
   end
 
-  def color_to(i, j)
-    if @cursor.cursor_pos == [i, j]
+  def color_to(i, j) 
+    if @cursor.selected? && @cursor.cursor_pos == [i, j]
+      bg = :light_cyan
+    elsif @cursor.cursor_pos == [i, j]
       bg = :light_yellow
     elsif (i + j).even?
       bg = :default
