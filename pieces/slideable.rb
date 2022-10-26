@@ -23,23 +23,37 @@ module Slideable
 
   def moves
     moves = []
-    move_dirs.each do |dir_x,dir_y|
-      cur_x, cur_y = pos
-
-      new_pos = [cur_x + dir_x, cur_y + dir_y]
-      next unless @board.valid_pos?(new_pos)
-          
-      until blocked_moves?(new_pos)
-        new_x,new_y = new_pos
-        moves << new_pos 
-        new_pos = [new_x + dir_x, new_y + dir_y]
-      end
+    move_dirs.each do |dx, dy|
+        moves.concat(grow_unblocked_moves_in_dir(dx, dy))
     end
 
-    moves   
+    moves
   end
 
-  def blocked_moves?(pos)
-    color == board[pos].color
+  private
+
+  def grow_unblocked_moves_in_dir(dx, dy)
+    moves = []
+    move = pos
+
+    loop do
+      x, y = move
+      move = [x + dx, y + dy]
+      break unless board.valid_pos?(move)
+
+      if board.empty?(move)
+        moves << move
+      else
+        # can not take pos with the same colour piece
+        break if color == board[move].color
+
+        # can take opposite piece
+        moves << move
+      end
+    end
+    
+    moves
   end
 end
+
+

@@ -1,24 +1,20 @@
 module Stepable
-    def moves
-        moves = []
-        move_diffs.each do |dir_x,dir_y|
-            cur_x, cur_y = pos
-            
-            new_pos = [cur_x + dir_x, cur_y + dir_y]
-            new_x,new_y = new_pos
-            
-            next unless @board.valid_pos?(new_pos)
+  def moves
+    moves = []
+    move_diffs.each do |dx,dy|
+      x,y = pos 
+      move =[x + dx,y + dy]
 
-            next if blocked_moves?(new_pos)
-    
-            moves << new_pos 
-            new_pos = [new_x + dir_x, new_y + dir_y]
-        end
+      next unless board.valid_pos?(move)
 
-        moves              
+      if board.empty?(move)
+        moves << move
+      elsif color != board[move].color
+        # can take opposite piece
+        moves << move
+      end
     end
 
-    def blocked_moves?(pos)
-        self.color == @board[pos].color
-    end
+    moves              
+  end
 end

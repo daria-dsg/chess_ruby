@@ -2,24 +2,24 @@ require_relative 'piece'
 require_relative 'stepable'
 
 class King < Piece
-    include Stepable
+  include Stepable
 
-    def symbol
-        "♔".colorize(color)
-    end
+  def symbol
+    "♔".colorize(color)
+  end
 
-    protected 
+  private
 
-    def move_diffs
-        [
-            [0, -1],
-            [-1, -1],
-            [-1, 0],
-            [-1, 1],
-            [0, 1],
-            [1, 1],
-            [1, 0],
-            [1, -1],
-        ]
-    end
+  def move_diffs
+    [
+      [0, -1],
+      [-1, -1],
+      [-1, 0],
+      [-1, 1],
+      [0, 1],
+      [1, 1],
+      [1, 0],
+      [1, -1],
+    ]
+  end
 end
