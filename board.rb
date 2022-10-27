@@ -92,13 +92,12 @@ class Board
 
   def in_check?(color)
     pos_king = find_king(color)
-
     rows.each do |row|
       row.each do |piece|
         return true if piece.color != color && piece.moves.include?(pos_king)
       end
 
-      return false
+      false
     end  
   end
 
