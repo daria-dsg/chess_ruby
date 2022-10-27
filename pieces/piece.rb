@@ -13,7 +13,7 @@ class Piece
   end
 
   def empty?
-    self == @nil
+    self.class == Null
   end
 
   def inspect

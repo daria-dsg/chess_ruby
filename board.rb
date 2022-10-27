@@ -57,7 +57,7 @@ class Board
 
   def [](pos)
     raise "Invalid position" unless valid_pos?(pos)
-
+    
     x, y = pos
     @rows[x][y]
   end
@@ -88,6 +88,18 @@ class Board
 
   def empty?(pos)
      self[pos].empty?
+  end
+
+  def in_check?(color)
+    pos_king = find_king(color)
+
+    rows.each do |row|
+      row.each do |piece|
+        return true if piece.color != color && piece.moves.include?(pos_king)
+      end
+
+      return false
+    end  
   end
 
   # return the position the kind of the player
