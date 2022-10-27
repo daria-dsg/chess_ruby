@@ -106,5 +106,4 @@ class Cursor
     raise "Invalid position" unless @board.valid_pos?(new_cursor)
     self.cursor_pos = new_cursor
   end
-
 end

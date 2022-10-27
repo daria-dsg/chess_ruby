@@ -86,9 +86,17 @@ class Board
     x.between?(0,7) && y.between?(0,7)
   end
 
-
   def empty?(pos)
      self[pos].empty?
+  end
+
+  # return the position the kind of the player
+  def find_king(color)
+    rows.each do |row|
+      row.each do |piece|
+        return piece.pos if piece.class == King && piece.color == color
+      end
+    end
   end
 end
 
