@@ -92,7 +92,7 @@ class Board
 
   def in_check?(color)
     pos_king = find_king(color)
-    pieces.any? {|piece| piece.color != color && piece.moves.include?(pos_king) } 
+    pieces.any? {|piece| piece.color != color && piece.moves.include?(pos_king)} 
   end
 
 
@@ -106,6 +106,11 @@ class Board
         return piece.pos if piece.class == King && piece.color == color
       end
     end
+  end
+ 
+  def find_king(color)
+    king = pieces.find {|piece| piece.class == King && piece.color == color} 
+    king.pos
   end
 end
 
