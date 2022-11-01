@@ -1,3 +1,5 @@
+require 'byebug'
+
 module Slideable
   HORIZONTAL_DIRS = [
     [0, -1],

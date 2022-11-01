@@ -54,7 +54,6 @@ class Board
     self[[7, 4]] = King.new(:white, self, [7, 4])
   end
 
-
   def [](pos)
     raise "Invalid position" unless valid_pos?(pos)
     
@@ -72,7 +71,7 @@ class Board
   def move_piece(start_pos, end_pos)
     raise "start position is empty" if empty?(start_pos)
     piece = self[start_pos]
-    
+
     if piece.moves.include?(end_pos)
         piece.pos = end_pos
         self[end_pos], self[start_pos] = piece, @nil
@@ -95,24 +94,28 @@ class Board
     pieces.any? {|piece| piece.color != color && piece.moves.include?(pos_king)} 
   end
 
-
   def pieces
     @rows.flatten.reject(&:empty?)
   end
 
   def find_king(color)
-    rows.each do |row|
-      row.each do |piece|
-        return piece.pos if piece.class == King && piece.color == color
-      end
-    end
-  end
- 
-  def find_king(color)
     king = pieces.find {|piece| piece.class == King && piece.color == color} 
     king.pos
   end
+
+  # def checkmate?(color)
+  #   in_check?(color) &&
+  #     pieces.none? {|piece| piece.colour == colour && valid_moves.any?}
+  # end
+
+  def dup
+    dup = Board.new
+
+    pieces.each do |piece|
+       dup[piece.pos] = piece.class.new(piece.color, dup, piece.pos)
+    end
+
+    dup
+  end
 end
 
-
-        

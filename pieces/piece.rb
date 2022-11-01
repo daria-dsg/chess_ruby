@@ -16,9 +16,27 @@ class Piece
     self.class == Null
   end
 
+  def valid_moves
+     valid = []
+     debugger
+     moves.each do |move|
+        valid << move unless self.move_into_check?(move)
+     end
+
+     valid
+  end
+
   def inspect
     {'class' => self.class, 'color' => @color, 'pos' => @pos }.inspect
   end
+
+  private
+
+  def move_into_check?(end_pos)
+    dup_board = @board.dup
+    dup_board.move_piece(pos,end_pos)
+    dup_board.in_check?(color)
+ end
 end
 
 

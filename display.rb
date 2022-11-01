@@ -34,7 +34,6 @@ class Display
     {background: bg}
   end
 
-
   def render
     build_grid.each_with_index {|row, i| puts "#{8 - i} #{row.join}"}
     print "  "
