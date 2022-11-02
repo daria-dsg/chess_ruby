@@ -4,10 +4,11 @@ require 'byebug'
 class Board
   attr_reader :rows
   
-  def initialize
+  def initialize(populate = true)
     @nil = Null.new
     @rows = Array.new(8){Array.new(8, @nil)}
-    populate_board
+
+    populate_board if populate == true
   end
 
   def populate_board
@@ -73,6 +74,7 @@ class Board
     piece = self[start_pos]
 
     if piece.moves.include?(end_pos)
+        raise "end position will leave you in checkmate" unless piece.valid_moves.include?(end_pos)
         piece.pos = end_pos
         self[end_pos], self[start_pos] = piece, @nil
     else
@@ -109,7 +111,8 @@ class Board
   # end
 
   def dup
-    dup = Board.new
+
+    dup = Board.new(false)
 
     pieces.each do |piece|
        dup[piece.pos] = piece.class.new(piece.color, dup, piece.pos)
@@ -117,5 +120,19 @@ class Board
 
     dup
   end
+
+  
+  def move_piece!(start_pos, end_pos)
+    raise "start position is empty" if empty?(start_pos)
+
+    piece = self[start_pos]
+    if piece.moves.include?(end_pos)
+        piece.pos = end_pos
+        self[end_pos], self[start_pos] = piece, @nil
+    else
+        raise "end position is not valid "
+    end
+  end
+
 end
 
