@@ -105,13 +105,12 @@ class Board
     king.pos
   end
 
-  # def checkmate?(color)
-  #   in_check?(color) &&
-  #     pieces.none? {|piece| piece.colour == colour && valid_moves.any?}
-  # end
+  def checkmate?(color)
+    in_check?(color) &&
+      pieces.none? {|piece| piece.color == color && piece.valid_moves.any?}
+  end
 
   def dup
-
     dup = Board.new(false)
 
     pieces.each do |piece|
@@ -121,7 +120,6 @@ class Board
     dup
   end
 
-  
   def move_piece!(start_pos, end_pos)
     raise "start position is empty" if empty?(start_pos)
 
