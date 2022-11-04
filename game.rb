@@ -3,20 +3,28 @@ require_relative 'board'
 require_relative 'player'
 
 class Game
+  
   def initialize
     @board = Board.new
     @display = Display.new(@board)
 
     @players = {
-      "player_1" => Player.new(:white, @display),
-      "player_2" => Player.new(:black, @display)
+      "white" => Player.new(:white, @display),
+      "black" => Player.new(:black, @display)
     }
 
-    @current_player = @players["player_1"]
+    @current_player = @players["white"]
   end
 
   def play
-     @display.render
-     @current_player.make_move
+
+  end
+
+  private
+
+  attr_writer :current_player
+
+  def swap_turn!
+    @current_player =   @current_player == @players["white"] ? @players["black"] : @players["white"]
   end
 end
