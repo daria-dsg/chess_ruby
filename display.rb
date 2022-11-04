@@ -3,6 +3,8 @@ require_relative 'cursor.rb'
 require 'colorize'
 
 class Display
+  attr_accessor :cursor
+
   def initialize(board)
     @board = board
     @cursor = Cursor.new([0, 0], @board)
@@ -35,16 +37,10 @@ class Display
   end
 
   def render
+    system("clear")
     build_grid.each_with_index {|row, i| puts "#{8 - i} #{row.join}"}
     print "  "
     ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].each {|char| print " #{char} "}
-  end
-
-  def test
-    loop do
-      system("clear")
-      render
-      @cursor.get_input
-    end
+    puts
   end
 end
