@@ -43,4 +43,8 @@ class Display
     ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].each {|char| print " #{char} "}
     puts
   end
+
+  def reset!
+     @cursor.toggle_selected
+  end
 end
