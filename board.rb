@@ -101,7 +101,7 @@ class Board
   end
 
   def find_king(color)
-    king = pieces.find {|piece| piece.class == King && piece.color == color} 
+    king = pieces.find {|piece| piece.class == King && piece.color == color}
     king.pos
   end
 
