@@ -1,5 +1,4 @@
 require_relative 'pieces'
-require 'byebug'
 
 class Board
   attr_reader :rows
@@ -69,17 +68,19 @@ class Board
     @rows[x][y] = val
   end
 
-  def move_piece(start_pos, end_pos)
-    raise "start position is empty" if empty?(start_pos)
-    piece = self[start_pos]
+  def move_piece(current_player,start_pos, end_pos)
+    raise "Start position is empty" if empty?(start_pos)
 
-    if piece.moves.include?(end_pos)
-        raise "end position will leave you in checkmate" unless piece.valid_moves.include?(end_pos)
-        piece.pos = end_pos
-        self[end_pos], self[start_pos] = piece, @nil
-    else
-        raise "end position is not valid "
+    piece = self[start_pos]
+    if current_player != piece.color
+      raise "You must move your own piece"
+    elsif !piece.moves.include?(end_pos)
+      raise "Piece can not move like this"
+    elsif !piece.valid_moves.include?(end_pos)
+      raise "End position will leave you in checkmate"
     end
+
+    move_piece!(start_pos, end_pos)
   end
 
   def valid_pos?(pos)
@@ -112,25 +113,16 @@ class Board
 
   def dup
     dup = Board.new(false)
-
     pieces.each do |piece|
        dup[piece.pos] = piece.class.new(piece.color, dup, piece.pos)
     end
-
     dup
   end
 
   def move_piece!(start_pos, end_pos)
-    raise "start position is empty" if empty?(start_pos)
-
     piece = self[start_pos]
-    if piece.moves.include?(end_pos)
-        piece.pos = end_pos
-        self[end_pos], self[start_pos] = piece, @nil
-    else
-        raise "end position is not valid "
-    end
+    self[end_pos], self[start_pos] = piece, @nil
+    piece.pos = end_pos
   end
-
 end
 

@@ -22,7 +22,6 @@ class Piece
      moves.each do |move|
         valid << move unless self.move_into_check?(move)
      end
-
      valid
   end
 
