@@ -13,13 +13,14 @@ I implemented keypresseed user input:
 
 #### Design patterns
 *  Sliding and Steppable module that allow return possible moves depending on type of piece and directions. 
-*  Singleton module and Null Piece class for empty tiles which is created once while we set up the board first time. 
+*  Singleton module and Null Piece class for empty tiles which is created once while we set up the board. 
 
 #### Features
 *  Colorized tiles depending on selected state of the cursor
 *  Colorized piece when it is selected
 *  Checking if the player in check or check mate 
 *  Deep duping of the board to help identify if the move will lead to check mate
+* Handling the wrong input from user
 
 
 
