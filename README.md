@@ -24,4 +24,5 @@ I implemented keypresseed user input:
 
 
 #### Demo
-![2022 06_38_01 (Copy)-high (1)](https://user-images.githubusercontent.com/94113384/200236183-4c1431d8-61d4-4dec-b120-4c03fd528959.gif)
+
+![chess_demo](https://user-images.githubusercontent.com/94113384/200244723-82f88264-3c4f-4413-96bc-ebe0f9cd938b.gif)
