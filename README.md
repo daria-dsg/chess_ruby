@@ -1,6 +1,6 @@
 # Chess game
 
-Commandline chess game created with Ruby.
+Command line chess game created with Ruby.
 
 
 ![chess_demo](https://user-images.githubusercontent.com/94113384/200244723-82f88264-3c4f-4413-96bc-ebe0f9cd938b.gif)
