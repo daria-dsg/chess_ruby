@@ -1,6 +1,9 @@
 # Chess game
 
-Commande-line chess game created with Ruby. 
+Commande-line chess game created with Ruby.
+
+
+![chess_demo](https://user-images.githubusercontent.com/94113384/200244723-82f88264-3c4f-4413-96bc-ebe0f9cd938b.gif)
 
 #### Intro
 The goal of the project was to write a chess-game using object-oriented programming. I wanted to practice design patterns and become familiar with class's inheritance.
@@ -23,6 +26,4 @@ I implemented keypresseed user input:
 * Handling the wrong input from user
 
 
-#### Demo
 
-![chess_demo](https://user-images.githubusercontent.com/94113384/200244723-82f88264-3c4f-4413-96bc-ebe0f9cd938b.gif)
