@@ -43,9 +43,9 @@ class Display
     if piece.selected
       color = :light_green
     elsif piece.color == :white
-      color = :white
+      color = :light_magenta
     else 
-      color = :black
+      color = :light_blue
     end
   end
 

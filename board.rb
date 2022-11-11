@@ -4,7 +4,7 @@ class Board
   attr_reader :rows
   
   def initialize(populate = true)
-    @nil = Null.new
+    @nil = Null.insance
     @rows = Array.new(8){Array.new(8, @nil)}
 
     populate_board if populate == true
